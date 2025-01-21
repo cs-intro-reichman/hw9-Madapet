@@ -92,13 +92,14 @@ public class LinkedList {
 		if (index == 0) {
 			newNode.next = this.first;
 			this.first = newNode;
-		}
-		if (index == size) {
-			this.last.next = newNode;
-			this.last = newNode;
 		} else {
-			newNode.next = this.getNode(index);
-			this.getNode(index - 1).next = newNode;
+			if (index == size) {
+				this.last.next = newNode;
+				this.last = newNode;
+			} else {
+				newNode.next = this.getNode(index);
+				this.getNode(index - 1).next = newNode;
+			}
 		}
 
 		this.size++;
@@ -214,8 +215,8 @@ public class LinkedList {
 	public String toString() {
 		//// Replace the following statement with your code
 		String linkedList = "LinkedList";
-		for (int i = 0; i<size;i++){
-			linkedList = linkedList +" -> "+ getNode(i).toString();
+		for (int i = 0; i < size; i++) {
+			linkedList = linkedList + " -> " + getNode(i).toString();
 		}
 		return linkedList;
 	}
