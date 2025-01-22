@@ -8,10 +8,17 @@
 public class MemorySpace {
 	public static void main(String[] args) {
 		MemorySpace memorySpace = new MemorySpace(100);
-		memorySpace.malloc(20);
+		int newadd = memorySpace.malloc(20);
+		System.out.println(newadd);
 		System.out.println(memorySpace.toString());
+		String expectedText = "(20 , 80) \n(0 , 20) ";
+
+		System.out.println(expectedText);
+		System.out.println(expectedText.equals(memorySpace.toString()));
+		
 	
 	}
+	
 
 
 	// A list of the memory blocks that are presently allocated
