@@ -15,12 +15,12 @@ public class LinkedList {
 
 		//check remove:
 		LinkedList list = new LinkedList(); 
-		// list.addFirst(block1);
+		list.addFirst(block1);
 		// list.addFirst(block2);
 		// list.addLast(block4);
 		System.out.println(list.toString());
-		list.remove(list.getNode(1));
-		System.out.println(list.toString());;
+		list.remove(list.getLast());
+		System.out.println(list.getSize());;
 
 		// LinkedList trylist = new LinkedList();
 		// System.out.println(trylist.toString());
@@ -217,6 +217,7 @@ public class LinkedList {
 	public void remove(Node node) {
 		if (this.first == node){
 			this.first = this.first.next;
+			
 		}else{
 			if (this.last == node){
 				Node newlast = this.getNode(size-1);
@@ -227,7 +228,8 @@ public class LinkedList {
 		}
 		}
 
-		this.size --;		
+		this.size --;
+		if (this.getSize() == 0){this.last = null;}		
 	}
 
 	/**
