@@ -8,9 +8,15 @@
 public class MemorySpace {
 	public static void main(String[] args) {
 		MemorySpace memorySpace = new MemorySpace(100);
-		// int address = memorySpace.malloc(100);
-		memorySpace.free(0);
-		System.out.println(memorySpace.freeList);
+		String expectedText = "(0 , 50) \n(50 , 50) ";
+		int address = memorySpace.malloc(50);
+		memorySpace.malloc(50);
+		System.out.println(memorySpace.toString());
+		memorySpace.free(address);
+		System.out.println(memorySpace.toString());
+		memorySpace.free(address);
+		System.out.println(memorySpace.toString().equals(expectedText));
+
 
 	}
 
@@ -108,19 +114,19 @@ public class MemorySpace {
 		}
 		if (freeList.getFirst().block.length == 0 && freeList.getSize() == 1) {
 			this.freeList = new LinkedList();
-		} else {
-
-			for (int i = 0; i < this.allocatedList.getSize(); i++) {
+		}
+		for (int i = 0; i < this.allocatedList.getSize(); i++) {
+			// System.out.println("got here");
+			// System.out.println("chech this -" + address);
+			// System.out.println("check " + this.allocatedList.getBlock(i).baseAddress);
+			if (this.allocatedList.getBlock(i).baseAddress == address) {
 				// System.out.println("got here");
-				// System.out.println("chech this -" + address);
-				// System.out.println("check " + this.allocatedList.getBlock(i).baseAddress);
-				if (this.allocatedList.getBlock(i).baseAddress == address) {
-					// System.out.println("got here");
-					this.freeList.addLast(this.allocatedList.getBlock(i));
-					this.allocatedList.remove(this.allocatedList.getBlock(i));
-				}
+				this.freeList.addLast(this.allocatedList.getBlock(i));
+				this.allocatedList.remove(this.allocatedList.getBlock(i));
+
 			}
 		}
+
 		//// Write your code here
 	}
 
