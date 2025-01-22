@@ -13,7 +13,7 @@ public class MemorySpace {
 		int address = memorySpace.malloc(100);
 		memorySpace.free(address);
 		System.out.println(memorySpace.toString().equals(expectedText));
-		
+
 	}
 
 	// A list of the memory blocks that are presently allocated
@@ -149,8 +149,32 @@ public class MemorySpace {
 	 * In this implementation Malloc does not call defrag.
 	 */
 	public void defrag() {
-
-		/// : Implement defrag test
+		int i = 0;
+		while (i < this.freeList.getSize()) {
+			MemoryBlock tmpBlock = this.freeList.getBlock(i);
+			int num = tmpBlock.baseAddress + tmpBlock.length;
+			MemoryBlock tmpBlock2 = null;
+			int j = 0;
+			while (j < this.freeList.getSize()) {
+				if (j == i) {
+					j++;
+				} else {
+					if (this.freeList.getBlock(j).baseAddress == num) {
+						tmpBlock2 = this.freeList.getBlock(j);
+						break;
+					} else {
+						j++;
+					}
+				}
+			}
+			if (tmpBlock2 != null){
+				this.freeList.getBlock(i).length += tmpBlock2.baseAddress;
+				this.freeList.remove(tmpBlock2);
+			}else{
+				i ++;
+			}
+			/// : Implement defrag test
 		//// Write your code here
+		}
 	}
 }
