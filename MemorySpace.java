@@ -7,12 +7,25 @@
  */
 public class MemorySpace {
 	public static void main(String[] args) {
-		MemorySpace memorySpace = new MemorySpace(100);
-		String expectedText = "(0 , 100) \n";
+		// MemorySpace memorySpace = new MemorySpace(100);
+		// String expected1 = "\n(0 , 5) (5 , 20) (25 , 20) (45 , 55) ";
+		// String expected2 = "(0 , 5) (25 , 20) \n(5 , 20) (45 , 55) ";
+		// String expected3 = "(0 , 45) \n(45 , 55) ";
 
-		int address = memorySpace.malloc(100);
-		memorySpace.free(address);
-		System.out.println(memorySpace.toString().equals(expectedText));
+		// int address = memorySpace.malloc(5);
+		// int address1 = memorySpace.malloc(20);
+		// int address2 = memorySpace.malloc(20);
+		// int address3 = memorySpace.malloc(55);
+		// System.out.println(memorySpace.toString());
+		// memorySpace.free(address);
+		// memorySpace.free(address2);
+		// System.out.println(memorySpace.toString());
+		// memorySpace.defrag();
+		// System.out.println(memorySpace.toString());
+
+		// memorySpace.free(address1);
+		// memorySpace.defrag();
+		// System.out.println(memorySpace.toString());
 
 	}
 
@@ -167,11 +180,11 @@ public class MemorySpace {
 					}
 				}
 			}
-			if (tmpBlock2 != null){
-				this.freeList.getBlock(i).length += tmpBlock2.baseAddress;
+			if (tmpBlock2 != null) {
+				this.freeList.getBlock(i).length += tmpBlock2.length;
 				this.freeList.remove(tmpBlock2);
-			}else{
-				i ++;
+			} else {
+				i++;
 			}
 			/// : Implement defrag test
 		//// Write your code here
