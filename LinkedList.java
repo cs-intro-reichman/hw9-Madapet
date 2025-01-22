@@ -13,6 +13,15 @@ public class LinkedList {
 		Node node3 = new Node(block3);
 		Node node4 = new Node(block4);
 
+		//check remove:
+		LinkedList list = new LinkedList(); 
+		// list.addFirst(block1);
+		// list.addFirst(block2);
+		// list.addLast(block4);
+		System.out.println(list.toString());
+		list.remove(list.getNode(1));
+		System.out.println(list.toString());;
+
 		// LinkedList trylist = new LinkedList();
 		// System.out.println(trylist.toString());
 
@@ -206,9 +215,19 @@ public class LinkedList {
 	 *             the node that will be removed from this list
 	 */
 	public void remove(Node node) {
-		Node tmpNode = node.next;
-		getNode(this.indexOf(node.block) - 1).next = tmpNode;
-		//// Write your code here
+		if (this.first == node){
+			this.first = this.first.next;
+		}else{
+			if (this.last == node){
+				Node newlast = this.getNode(size-1);
+				newlast.next = null;
+				this.last = newlast;
+			}else{
+				this.getNode(this.indexOf(node.block)-1).next = node.next;
+		}
+		}
+
+		this.size --;		
 	}
 
 	/**
