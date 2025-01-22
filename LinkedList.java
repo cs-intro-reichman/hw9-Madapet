@@ -16,8 +16,8 @@ public class LinkedList {
 		//check remove:
 		LinkedList list = new LinkedList(); 
 		list.addFirst(block1);
-		// list.addFirst(block2);
-		// list.addLast(block4);
+		list.addFirst(block2);
+		list.addLast(block4);
 		System.out.println(list.toString());
 		list.remove(list.getLast());
 		System.out.println(list.getSize());;
@@ -220,7 +220,7 @@ public class LinkedList {
 			
 		}else{
 			if (this.last == node){
-				Node newlast = this.getNode(size-1);
+				Node newlast = this.getNode(size-2);
 				newlast.next = null;
 				this.last = newlast;
 			}else{
