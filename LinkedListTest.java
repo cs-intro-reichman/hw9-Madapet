@@ -27,6 +27,7 @@ public class LinkedListTest {
 		
 		// Frees a few memory blocks:
 		for (int i = 0; i < addresses.length; i += 2) {
+			//System.out.println(" i= "+addresses[i]);
 			m.free(addresses[i]);
 		}
 		System.out.println(m + "\n");
