@@ -6,6 +6,13 @@
  * used, respectively, for creating new blocks and recycling existing blocks.
  */
 public class MemorySpace {
+	public static void main(String[] args) {
+		MemorySpace memorySpace = new MemorySpace(100);
+		memorySpace.malloc(20);
+		System.out.println(memorySpace.toString());
+	
+	}
+
 
 	// A list of the memory blocks that are presently allocated
 	private LinkedList allocatedList;
@@ -75,6 +82,7 @@ public class MemorySpace {
 				this.allocatedList.addLast(newAllocetedBlock);
 				tmpNode.block.length -= length;
 				tmpNode.block.baseAddress += length;
+				return newAllocetedBlock.baseAddress;
 			} else {
 				tmpNode = tmpNode.next;
 			}
