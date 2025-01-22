@@ -8,10 +8,12 @@
 public class MemorySpace {
 	public static void main(String[] args) {
 		MemorySpace memorySpace = new MemorySpace(100);
-		memorySpace.malloc(100);
-		memorySpace.free(110);
-		System.out.println(memorySpace.toString());
+		String expectedText = "(0 , 100) \n";
 
+		int address = memorySpace.malloc(100);
+		memorySpace.free(address);
+		System.out.println(memorySpace.toString().equals(expectedText));
+		
 	}
 
 	// A list of the memory blocks that are presently allocated
@@ -115,6 +117,8 @@ public class MemorySpace {
 				// System.out.println("got here");
 				if (freeList.getFirst().block.length == 0 && freeList.getSize() == 1) {
 					this.freeList = new LinkedList();
+					this.freeList.addLast(this.allocatedList.getBlock(i));
+					this.allocatedList.remove(this.allocatedList.getBlock(i));
 				} else {
 					this.freeList.addLast(this.allocatedList.getBlock(i));
 					this.allocatedList.remove(this.allocatedList.getBlock(i));
@@ -145,7 +149,8 @@ public class MemorySpace {
 	 * In this implementation Malloc does not call defrag.
 	 */
 	public void defrag() {
-		/// TODO: Implement defrag test
+
+		/// : Implement defrag test
 		//// Write your code here
 	}
 }
