@@ -8,18 +8,16 @@
 public class MemorySpace {
 	public static void main(String[] args) {
 		MemorySpace memorySpace = new MemorySpace(100);
-		int newadd = memorySpace.malloc(20);
-		System.out.println(newadd);
-		System.out.println(memorySpace.toString());
-		String expectedText = "(20 , 80) \n(0 , 20) ";
+		int address1 = memorySpace.malloc(40);
+		int address2 = memorySpace.malloc(40);
+		int address3 = memorySpace.malloc(20);
+		// System.out.println(address1+" " + address2 +" " +address3);
+		// System.out.println(memorySpace.toString());
 
-		System.out.println(expectedText);
-		System.out.println(expectedText.equals(memorySpace.toString()));
+
 		
-	
-	}
-	
 
+	}
 
 	// A list of the memory blocks that are presently allocated
 	private LinkedList allocatedList;
@@ -109,12 +107,12 @@ public class MemorySpace {
 	 *                    the starting address of the block to freeList
 	 */
 	public void free(int address) {
-		for (int i = 0; i< this.allocatedList.getSize(); i++){
-			//System.out.println("got here");
-			//System.out.println("chech this -" + address);
-			//System.out.println("check " + this.allocatedList.getBlock(i).baseAddress);
-			if (this.allocatedList.getBlock(i).baseAddress == address){
-				//System.out.println("got here");
+		for (int i = 0; i < this.allocatedList.getSize(); i++) {
+			// System.out.println("got here");
+			// System.out.println("chech this -" + address);
+			// System.out.println("check " + this.allocatedList.getBlock(i).baseAddress);
+			if (this.allocatedList.getBlock(i).baseAddress == address) {
+				// System.out.println("got here");
 				this.freeList.addLast(this.allocatedList.getBlock(i));
 				this.allocatedList.remove(this.allocatedList.getBlock(i));
 			}
@@ -128,6 +126,9 @@ public class MemorySpace {
 	 * for debugging purposes.
 	 */
 	public String toString() {
+		if(freeList.getFirst().block.length == 0 && freeList.getSize() == 1){
+			return "\n" + allocatedList.toString();
+		}
 		return freeList.toString() + "\n" + allocatedList.toString();
 	}
 
