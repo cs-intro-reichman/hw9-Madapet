@@ -8,15 +8,9 @@
 public class MemorySpace {
 	public static void main(String[] args) {
 		MemorySpace memorySpace = new MemorySpace(100);
-		String expectedText = "(0 , 50) \n(50 , 50) ";
-		int address = memorySpace.malloc(50);
-		memorySpace.malloc(50);
+		memorySpace.malloc(100);
+		memorySpace.free(110);
 		System.out.println(memorySpace.toString());
-		memorySpace.free(address);
-		System.out.println(memorySpace.toString());
-		memorySpace.free(address);
-		System.out.println(memorySpace.toString().equals(expectedText));
-
 
 	}
 
@@ -112,17 +106,19 @@ public class MemorySpace {
 			throw new IllegalArgumentException(
 					"index must be between 0 and size");
 		}
-		if (freeList.getFirst().block.length == 0 && freeList.getSize() == 1) {
-			this.freeList = new LinkedList();
-		}
+
 		for (int i = 0; i < this.allocatedList.getSize(); i++) {
 			// System.out.println("got here");
 			// System.out.println("chech this -" + address);
 			// System.out.println("check " + this.allocatedList.getBlock(i).baseAddress);
 			if (this.allocatedList.getBlock(i).baseAddress == address) {
 				// System.out.println("got here");
-				this.freeList.addLast(this.allocatedList.getBlock(i));
-				this.allocatedList.remove(this.allocatedList.getBlock(i));
+				if (freeList.getFirst().block.length == 0 && freeList.getSize() == 1) {
+					this.freeList = new LinkedList();
+				} else {
+					this.freeList.addLast(this.allocatedList.getBlock(i));
+					this.allocatedList.remove(this.allocatedList.getBlock(i));
+				}
 
 			}
 		}
